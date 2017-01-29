@@ -10,12 +10,13 @@
     (is (= :black (:turn state)))))
 
 (deftest player-can-move-when-in-turn
-  (let [state (initial-game-state)]
-    (is (= {:color :black :type :man} (get-in state [:board 1 2])))))
+  (let [state1 (initial-game-state)
+        state2 (play state1 [1 2] [2 3] :black)]
+    (is (= {:color :black :type :man} (get-in state2 [:board 2 3])))))
 
 (deftest player-cannot-move-on-opponents-turn
   (let [state1 (initial-game-state)
-        state2 (play state1 [1 2] [2 3] :white)]
+        state2 (play state1 [0 5] [1 4] :white)]
     (is (= state1 state2))))
 
 (deftest white-plays-after-black
